@@ -10,9 +10,9 @@ public class Login implements ActionListener {
 	JLabel b1,b2,b3,b4,b5,b6;
 	JTextField id;
 	JPasswordField pw;
-	JButton btn;
+	JButton btn_login,btn_signup;
 	
-	public Login(){
+	public Login (){
 	frame = new JFrame("Login");
 	Color color = new Color(0,204,210);
 	frame.getContentPane().setBackground(color);
@@ -26,13 +26,18 @@ public class Login implements ActionListener {
 	ImageIcon img2 = new ImageIcon(this.getClass().getResource("/hospital1.png"));
 	b6.setIcon(img2);
 	b6.setBounds(380, 20, 60, 60);
-	frame.add(b6);
+	frame.getContentPane().add(b6);
 	
 	// login button
-	btn = new JButton("Login");
-	btn.setBounds(140, 280, 100, 50);
-	btn.addActionListener(this);
+	btn_login = new JButton("Login");
+	btn_login.setBounds(100, 280, 100, 50);
+	btn_login.addActionListener(this);
 	
+	// register button
+	btn_signup = new JButton("Sign up");
+	btn_signup.setBounds(240, 280, 100, 50);
+	btn_signup.addActionListener(this);
+
 	// User ID part
 	b4 = new JLabel("");
 	ImageIcon img = new ImageIcon(this.getClass().getResource("/profile1.png"));
@@ -60,7 +65,8 @@ public class Login implements ActionListener {
 	frame.add(b2);
 	frame.add(b3);
 	frame.add(pw);
-	frame.add(btn);
+	frame.add(btn_login);
+	frame.add(btn_signup);
 	frame.setSize(500,500);
 	frame.setLayout(null);
 	frame.setVisible(true);
@@ -74,11 +80,13 @@ public static void main(String args[])
 
 @Override
 public void actionPerformed(ActionEvent e) {
+	if(e.getSource() == btn_login) {
 	String username = id.getText();
     String password = String.valueOf(pw.getPassword());
+    
        
        if (username.equals("") && password.equals("")){
-       	JOptionPane.showMessageDialog(frame,"Please insert your credential");
+       	JOptionPane.showMessageDialog(frame,"Please insert your credentials");
        }
        else if (username.equals("samir") && password.equals("1234")){
            JOptionPane.showMessageDialog(frame,"login successfull");
@@ -86,11 +94,16 @@ public void actionPerformed(ActionEvent e) {
            pw.setText(null);
        }
        else{
-           JOptionPane.showMessageDialog(frame, "User ID or password inncorect");
+           JOptionPane.showMessageDialog(frame, "User ID or Password incorrect");
            id.setText(null);
            pw.setText(null);
        }
 	
-	
+   
+}
+	 if(e.getSource() == btn_signup) {
+	    	new RegisterPage();
+	    	
+	    }
 }
 }
